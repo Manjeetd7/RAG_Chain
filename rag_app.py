@@ -47,7 +47,7 @@ def load_and_chunk_pdf(pdf_path: str):
     print(f"Prepared {len(pages)} page-based chunks.")
     return pages 
 
-PDF_PATH = ""
+PDF_PATH = ""  #Your PDF file path here
 
 pages = load_and_chunk_pdf(PDF_PATH)
 print(f"Total pages returned: {len(pages)}")
@@ -86,7 +86,7 @@ def create_index():
         print(f"Index '{index_name}' already exists. Skipping creation.")
 
 
-# create_index()
+create_index()
 
 
 def upsert_pdf_records(chunks, embeddings_model, index_name, namespace="pdf-chunks"):
@@ -133,7 +133,7 @@ def upsert_pdf_records(chunks, embeddings_model, index_name, namespace="pdf-chun
     index.upsert(vectors=vectors_to_upsert, namespace=namespace)
     print("Upsert complete.")
 
-# upsert_pdf_records(chunks, embeddings_model, PINECONE_INDEX_NAME)
+upsert_pdf_records(chunks, embeddings_model, PINECONE_INDEX_NAME)
 
 
 def create_retrieval_chain_with_pinecone():
