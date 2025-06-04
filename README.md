@@ -1,4 +1,4 @@
-### DocuChat - RAG Chain Q&A Application
+# DocuChat - RAG Chain Q&A Application
 
 DocuChat is a Retrieval Augmented Generation (RAG) chain application, providing a web-based interface to ask questions about a PDF document. The application consists of a React frontend for the user interface and a Python Flask backend that houses the RAG logic. It utilizes LangChain for orchestration, Pinecone as the vector database, and Google's Gemini 1.5 Flash as the Large Language Model (LLM).
 
