@@ -1,86 +1,118 @@
-# RAGChain with LangChain, Pinecone, and Google Gemini
+### RAG Chain Q&A Application
 
-This repository contains a Python script that implements a Retrieval Augmented Generation (RAG) chain. It leverages LangChain for orchestration, Pinecone for vector storage, and Google's Gemini-1.5-Flash model for generating responses. The application processes a PDF document, creates embeddings, stores them in Pinecone, and then uses a retrieval chain to answer questions based on the document's content.
+This project implements a Retrieval Augmented Generation (RAG) chain application, providing a web-based interface to ask questions about a PDF document. The application consists of a React frontend for the user interface and a Python Flask backend that houses the RAG logic. It utilizes LangChain for orchestration, Pinecone as the vector database, and Google's Gemini 1.5 Flash as the Large Language Model (LLM).
 
-## Features
+## ✨ Features
+Interactive Q&A: Ask questions through a user-friendly React interface.
 
-* **PDF Loading and Chunking:** Loads PDF documents and splits them into manageable chunks.
-* **HuggingFace Embeddings:** Uses `sentence-transformers/all-MiniLM-L6-v2` for generating text embeddings.
-* **Pinecone Integration:**
-    * Creates a Pinecone index if it doesn't exist.
-    * Upserts document chunks and their embeddings into Pinecone.
-    * Utilizes Pinecone as a vector store for efficient similarity search.
-* **Google Gemini Integration:** Employs the `gemini-1.5-flash` model via `ChatGoogleGenerativeAI` for question answering.
-* **LangChain RAG Chain:** Constructs a RAG chain to retrieve relevant document chunks and generate context-aware answers.
+Contextual Answers: Get answers grounded in the content of a provided PDF document.
 
-## Setup
+Retrieved Context Display: See the specific document snippets (context) used by the LLM to formulate its answer.
 
-### Prerequisites
+Scalable Vector Search: Leverages Pinecone for efficient semantic search over document embeddings.
 
-* Python 3.8+
-* Google API Key (for Gemini)
-* Pinecone API Key and Environment
-* A PDF file to use as source material
+Modular Architecture: Separate frontend and backend components for clear separation of concerns.
 
-### Installation
+## 🚀 Technologies Used
+Frontend: React (JavaScript)
 
-1.  **Clone the repository:**
+Backend: Python (Flask)
 
-    ```bash
-    git clone <your-repository-url>
-    cd <your-repository-name>
-    ```
+RAG Framework: LangChain
 
-2.  **Create a virtual environment (recommended):**
+Vector Database: Pinecone
 
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
+Embeddings: HuggingFace Embeddings (sentence-transformers/all-MiniLM-L6-v2)
 
-3.  **Install the required packages:**
+Large Language Model (LLM): Google Generative AI (Gemini 1.5 Flash)
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+PDF Processing: PyPDFLoader
 
-    (You'll need to create a `requirements.txt` file containing the following. See "Generating `requirements.txt`" below if you prefer to generate it from your environment.)
+## 📋 Prerequisites
+Before you begin, ensure you have the following installed:
 
-    ```
-    python-dotenv
-    langchain-community
-    langchain-text-splitters
-    langchain-google-genai
-    pinecone-client
-    langchain-pinecone
-    langchain
-    pypdf
-    sentence-transformers
-    ```
+Python 3.8+
 
-4.  **Set up environment variables:**
+Node.js and npm (or Yarn)
 
-    Create a `.env` file in the root directory of your project and add the following:
+Git
 
-    ```
-    GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY"
-    PINECONE_API_KEY="YOUR_PINECONE_API_KEY"
-    PINECONE_ENVIRONMENT="YOUR_PINECONE_ENVIRONMENT"
-    ```
+You will also need API keys and accounts for:
 
-    Replace `"YOUR_GOOGLE_API_KEY"`, `"YOUR_PINECONE_API_KEY"`, and `"YOUR_PINECONE_ENVIRONMENT"` with your actual API keys and environment.
+Google Cloud / Gemini API: Obtain a GOOGLE_API_KEY.
 
-5.  **Place your PDF file:**
+Pinecone: Obtain a PINECONE_API_KEY and identify your PINECONE_ENVIRONMENT (e.g., us-east-1).
 
-    Update the `PDF_PATH` variable in the `main.py` (or your equivalent) script to point to your PDF file. For example:
+## 📁 Project Structure
+The project is organized into two main directories:
 
-    ```python
-    PDF_PATH = ""  # Your PDF file path here
-    ```
+![image](https://github.com/user-attachments/assets/d7fb74d0-f11f-4f6a-9fad-41165557cd93)
 
-### Generating `requirements.txt`
 
-If you prefer to generate the `requirements.txt` file from your active environment, you can run:
+## ⚙️ Setup and Installation
+Follow these steps to set up and run the application locally.
 
-```bash
-pip freeze > requirements.txt
+ ## 1. Clone the Repository
+Open your terminal or command prompt and run:
+
+git clone https://github.com/Manjeetd7/client.git
+
+cd client
+
+## 2. Configure Environment Variables
+
+Create a file named .env inside the server/ directory and add your API keys:
+
+## server/.env
+
+GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY"
+
+PINECONE_API_KEY="YOUR_PINECONE_API_KEY"
+
+PINECONE_ENVIRONMENT="YOUR_PINECONE_ENVIRONMENT" # e.g., "us-east-1"
+
+Important: The .env file is listed in .gitignore and will not be pushed to your GitHub repository.
+
+## 3. Prepare the PDF Document
+Place your story.pdf file inside the server/ directory. This is the document your RAG chain will process.
+
+## 4. Backend Setup
+Navigate to the server/ directory, install the Python dependencies, and run the Flask application.
+
+cd server
+
+pip install -r requirements.txt
+
+python rag_app.py
+
+The first time you run rag_app.py, it will:
+
+Load and chunk story.pdf.
+
+Create embeddings for the chunks.
+
+Create a Pinecone index (if it doesn't exist with the specified name).
+
+Upsert the PDF chunks and their embeddings into your Pinecone index.
+
+## Initialize the RAG chain.
+
+The Flask server will start and typically listen on http://localhost:5000/. Keep this terminal running.
+
+## 5. Frontend Setup
+Open a new terminal window and navigate to the frontend/ directory, install the Node.js dependencies, and start the React development server.
+
+cd ../frontend # Go back to the root, then into frontend
+
+npm install
+
+npm start
+
+The React development server will start, usually opening your application in your web browser at http://localhost:3000/. Keep this terminal running.
+
+## 🚀 Running the Application
+Ensure your Python backend is running in one terminal (python rag_app.py in server/).
+
+Ensure your React frontend is running in another terminal (npm start in frontend/).
+
+Open your web browser and navigate to http://localhost:3000/.
