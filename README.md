@@ -75,7 +75,7 @@ This repository contains a Python script that implements a Retrieval Augmented G
     Update the `PDF_PATH` variable in the `main.py` (or your equivalent) script to point to your PDF file. For example:
 
     ```python
-    PDF_PATH = "story.pdf"  # Your PDF file path here
+    PDF_PATH = ""  # Your PDF file path here
     ```
 
 ### Generating `requirements.txt`
