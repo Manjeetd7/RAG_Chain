@@ -38,7 +38,7 @@ pc = Pinecone(
     environment=PINECONE_ENVIRONMENT
 )
 
-def load_and_chunk_pdf(pdf_path: str):
+def load_and_chunk_pdf(pdf_path: str):  #loading the PDF and chunking it into pages
     """
     Loads a PDF document and splits it into pages.
     In a more advanced RAG, you might use RecursiveCharacterTextSplitter here.
